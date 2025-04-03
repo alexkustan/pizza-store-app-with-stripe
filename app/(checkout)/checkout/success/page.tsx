@@ -9,7 +9,7 @@ interface Props {
   orderId: number;
 }
 
-const successPage: React.FC<Props> = ({ orderId }) => {
+export const successPage: React.FC<Props> = ({ orderId }) => {
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <Title
@@ -33,4 +33,3 @@ const successPage: React.FC<Props> = ({ orderId }) => {
     </div>
   );
 };
-export default successPage;
