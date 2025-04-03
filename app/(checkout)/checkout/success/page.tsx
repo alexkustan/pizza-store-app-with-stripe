@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface Props {
-  orderId: number;
-}
-
-const SuccessPage: React.FC<Props> = ({ orderId }) => {
+const SuccessPage: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <Title
@@ -23,7 +19,7 @@ const SuccessPage: React.FC<Props> = ({ orderId }) => {
         height={300}
         width={300}
         alt="check"
-      ></Image>
+      />
       <Link href="/">
         <Button size="lg" className="flex items-center gap-1">
           <ArrowLeft />
