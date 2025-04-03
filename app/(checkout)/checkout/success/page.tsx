@@ -9,11 +9,11 @@ interface Props {
   orderId: number;
 }
 
-export const successPage: React.FC<Props> = ({ orderId }) => {
+const SuccessPage: React.FC<Props> = ({ orderId }) => {
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <Title
-        text={"your order has been accepted"}
+        text={"Your order has been accepted"}
         size="xl"
         className="mt-12 font-bold"
       />
@@ -33,3 +33,5 @@ export const successPage: React.FC<Props> = ({ orderId }) => {
     </div>
   );
 };
+
+export default SuccessPage;

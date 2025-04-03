@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export const cancelPage: React.FC = () => {
+const CancelPage: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <Title
@@ -29,3 +29,5 @@ export const cancelPage: React.FC = () => {
     </div>
   );
 };
+
+export default CancelPage;
