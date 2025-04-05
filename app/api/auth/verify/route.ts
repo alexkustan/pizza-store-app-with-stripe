@@ -1,36 +1,50 @@
+export const dynamic = "force-dynamic";
+
 import { prisma } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
     const code = req.nextUrl.searchParams.get("code");
+
     if (!code) {
-      return NextResponse.json({ error: "Code is wrong" }, { status: 400 });
+      return NextResponse.json({ error: "Code is missing" }, { status: 400 });
     }
-    const verficationCode = await prisma.verificationCode.findFirst({
+
+    const verificationCode = await prisma.verificationCode.findFirst({
       where: {
         code,
       },
     });
-    if (!verficationCode) {
-      return NextResponse.json({ error: "wrong code" }, { status: 400 });
+
+    if (!verificationCode) {
+      return NextResponse.json(
+        { error: "Invalid verification code" },
+        { status: 400 }
+      );
     }
+
     await prisma.user.update({
       where: {
-        id: verficationCode.userId,
+        id: verificationCode.userId,
       },
       data: {
         verified: new Date(),
       },
     });
+
     await prisma.verificationCode.delete({
       where: {
-        id: verficationCode.id,
+        id: verificationCode.id,
       },
     });
+
     return NextResponse.redirect(new URL("/?verified", req.url));
   } catch (error) {
-    console.error(error);
-    console.log("[VERIFY_GET] Server error", error);
+    console.error("[VERIFY_GET] Server error", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
